@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #333;
+        }
+        input[type="password"],
+        input[type="email"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #333;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <form method="post" action="/api1.0/users/reg">
+        <input name="email" type="email" placeholder="Email">
+        <input name="password" type="password" placeholder="Password">
+        <input type="password" placeholder="Confirm Password">
+        <button type="submit" >Submit</button>
+    </form>
+</div>
+</body>
+</html>

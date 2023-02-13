@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <appenders>
+
+        <File name="SearchFile" fileName="logs/search.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+            </Filters>
+        </File>
+        <File name="InputErrorsFile" fileName="logs/input_errors.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+            </Filters>
+        </File>
+        <File name="exceptions" fileName="logs/exceptions.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+            </Filters>
+        </File>
+
+    </appenders>
+
+
+
+    <loggers>
+        <Logger name="SearchFile" level="info" additivity="false">
+            <appender-ref ref="SearchFile" level="info"/>>
+        </Logger>
+        <Logger name="InputErrorsFile" level="info" additivity="false">
+            <appender-ref ref="InputErrorsFile" level="info"/>
+        </Logger>
+        <Logger name="exceptions" level="info" additivity="false">
+            <appender-ref ref="exceptions" level="info"/>
+        </Logger>
+        <root level="info">
+            <appender-ref ref="exceptions" level="info" />
+        </root>
+    </loggers>
+</configuration>

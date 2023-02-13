@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 350px;
+            height: 330px;
+            border: 1px solid gray;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .card .description {
+            margin: -5px;
+            font-size: 8px;
+            text-align: center;
+        }
+
+        .card .price {
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .card .bid-button {
+            padding: 5px 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 8px;
+            cursor: pointer;
+        }
+
+        .card .bid-button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome</h1>
+        <div class="log-reg-btn">
+            <a href="/api1.0/users/login">Login</a>
+            <a href="/api1.0/users/registration">Register</a>
+        </div>
+        <div class="email-show">
+            <a href="" th:text="${userEmail}"></a>
+            <a href="/api1.0/product">Exit</a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="card" th:each="product : ${products}">
+            <img th:src="@{${'/images/' + product.getImgHref()}}" alt="Ad Image"/>
+            <h2 th:text="${product.getName()}"></h2>
+            <p class="description" th:text="${product.getDescription()}"></p>
+            <p class="price" th:text="${'price: ' + product.getMinPrice() + '$'}"></p>
+            <p class="price" th:text="${'price: ' + product.getCurrentPrice() + '$'}"></p>
+            <form th:object="${product}" th:method="PUT" th:action="@{/api1.0/product/{id}(id=${product.getId()})}">
+                <button type="submit" class="bid-button">Make a Bid</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <script type="text/javascript" th:inline="javascript">
+        // Show or hide the buttons when the email Item is present
+        const logRegButton = document.querySelector(".log-reg-btn");
+        const userEmailDiv = document.querySelector(".email-show");
+        var email = [[${userEmail}]];
+            if (email === null) {
+                logRegButton.style.display = "block";
+                userEmailDiv.style.display = "none"
+            } else {
+                logRegButton.style.display = "none";
+                userEmailDiv.style.display = "block";
+            }
+    </script>
+</body>
+</html>
+

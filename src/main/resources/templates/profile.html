@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Page</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    .user-email {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .add-item-form {
+      display: none;
+      background-color: lightgray;
+      padding: 20px;
+      width: 50%;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+    .add-item-form input[type="number"],
+    .add-item-form input[type="text"],
+    .add-item-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+    }
+    .add-item-form button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    a[type="submit"] {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .add-item-form button[type="submit"]:hover {
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+<h1 >User Page</h1>
+<div class="user-email" th:text="'Email:' + ${userEmail}"></div>
+<button id="add-item-button">Add Item</button>
+
+<form method="post" action="/api1.0/product/add" class="add-item-form" enctype="multipart/form-data">
+  <input name="name" type="text" placeholder="Item Name" required>
+  <textarea name="description" placeholder="Item Description" required></textarea>
+  <input name="minprice" type="number" placeholder="Minimum Price" required>
+  <input name="file" type="file" accept="image/*">
+  <button type="submit" >Add Item</button>
+</form>
+
+<a href="/api1.0/product/board">Check Board</a>
+
+<script>
+  // Show or hide the form when the Add Item button is clicked
+  const addItemButton = document.getElementById("add-item-button");
+  const addItemForm = document.querySelector(".add-item-form");
+  addItemButton.addEventListener("click", function () {
+    if (addItemForm.style.display === "none") {
+      addItemForm.style.display = "block";
+    } else {
+      addItemForm.style.display = "none";
+    }
+  });
+</script>
+</body>
+</html>
